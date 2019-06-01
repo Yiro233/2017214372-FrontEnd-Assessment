@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, shrink-to-fit=no, user-scalable=no">
+    <title>天气</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="Home.css">
+    <link rel="stylesheet" href="iconfontIndex.css">
+    <link rel="stylesheet" href="iconfontWeather.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="Convert_Pinyin.js"></script>
+    <script src="Home.js"></script>
+</head>
+<body class="">
+    <div id="root">
+        <section id="sec-main" class="container">
+            <p id="txt-location">
+                
+            </p>
+            <p id="txt-temperature"></p>
+            <p id="txt-weather"></p>
+            <div id="ct-wind-humidity">
+                <p class="txt"></p>
+                <p class="show txt"></p>
+            </div>
+            <p id="txt-tips"></p>
+            <div class="ct-aqi">
+                <p id="til"></p>
+                <p id="value"></p>
+            </div>
+            <div class="ct-pop-window">
+                <div class="bg-cover"></div>
+                <div id="ct-air-pop" class="ct-window">
+                    <div id="ct-main">
+                        <a id="icon-close"></a>
+                        <p id="titl">空气质量指数</p>
+                        <p id="val"></p>
+                        <p id="level"></p>
+                    </div>
+                    <table id="detail">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="val">pm2.5</p>
+                                    <p class="titl">PM2.5</p>
+                                </td>
+                                <td>
+                                    <p class="val">pm10</p>
+                                    <p class="titl">PM10</p>
+                                </td>
+                                <td>
+                                    <p class="val">so2</p>
+                                    <p class="titl">SO2</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="val">no2</p>
+                                    <p class="titl">NO2</p>
+                                </td>
+                                <td>
+                                    <p class="val">o3</p>
+                                    <p class="titl">O3</p>
+                                </td>
+                                <td>
+                                    <p class="val">co</p>
+                                    <p class="titl">CO</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+               </div>
+            </div>
+            <div id="ct-pop-window" style="display:none">
+                <form >
+                    输入省份:<input type="text" name="province" id="province"><br>
+                    输入城市:<input type="text" name="city" id="city"><br>
+                    输入区:<input type="text" name="county" id="county"><br>
+                    <button type="submit" onclick="getInput()">切换</button>
+                </form>
+            </div>
+        </section>
+        <section id="sec-tomorrow" class="container">
+            <div class="item">
+                <div class="top">
+                    <p class="date">今天</p>
+                    <p class="temperature">TdDegree°</p>
+                </div>
+                <div class="bottom">
+                    <p class="weather">TdWth</p>
+                    <i class="iconfont logo todayWeather"></i>
+                </div>
+            </div>
+            <div class="item">
+                <div class="top">
+                    <p class="date">明天</p>
+                    <p class="temperature">TmDegree°</p>
+                </div>
+                <div class="bottom">
+                    <p class="weather">TmWth</p>
+                    <i class="iconfont logo tomorrowWeather"></i>
+                </div>
+            </div>
+        </section>
+        <section id="sec-hours" class="container">
+            <div id="ct-scroll" style="width: 800%;">
+                <ol id="ls-hours-weather"></ol>
+            </div>
+        </section>
+        <section id="sec-days" class="container">
+            <div id="ct-scroll" style="width: 500px;">
+                <ol id="ls-days"></ol>
+                <div id="ct-chart-days" style="width: 500px;"></div>
+            </div>
+        </section>
+        <section id="sec-living" class="container">
+            <div id="living-scroll" style="width:200%;">
+                <ul id="ls-living"></ul>
+            </div>
+            <div class="ct-pop-window">
+                <div class="bg-cover"></div>
+                <div class="ct-window" >
+                    <h3 class="title" style="background-color: rgb(163, 223, 212);"></h3>
+                    <p class="txt-info"></p>
+                    <button class="btn-close" style="background-color: rgb(163, 223, 212);">我知道了</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
