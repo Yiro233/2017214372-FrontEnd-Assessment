@@ -48,19 +48,29 @@ function getAir(province, city, county) {
         enctype: "multipart/form-data",
         success: (res) => {
             setAir(res);
-        }   
+        }
     })
 }
-function setBackground(weather) {
-    let weatherTable = {
-        "阴":"url(overcast.jpg)",
-        "晴":"url(clear.jpg)",
-        "多云":"url(cloud.jpg)",
-        "雷阵雨":"url(thunder.jpg)",
-        "雨":"url(rain.jpg)",
-        "雪":"url(snow.jpg)"
+function setBackground(weatherData) {
+    weatherObj = {
+        "yin": "url(overcast.jpg)",
+        "qing": "url(clear.jpg)",
+        "duoyun": "url(cloud.jpg)",
+        "lei": "url(thunder.jpg)",
+        "yu": "url(rain.jpg)",
+        "xue": "url(snow.jpg)"
+    }
+    let weatherTable = (weather)=>{
+        if (weather.match(/lei.*/)){
+            weather = 'lei';
+        } else if (weather.match(/.*yu/)){
+            weather = 'yu';
+        } else if (weather.match(/.*xue/)) {
+            weather = 'xue';
+        }
+        return weatherObj[weather];
     };
-    document.getElementById("sec-main").style.backgroundImage = weatherTable[weather];
+    document.getElementById("sec-main").style.backgroundImage = weatherTable(pinyin.getFullChars(weatherData).toLowerCase());
     document.getElementById("sec-main").style.backgroundSize = "100%";
 }
 function setDegree(degree) {
@@ -284,9 +294,9 @@ function drawChart(maxDegree,minDegree) {
         datasets: [{
             data: maxDegree,
             backgroundColor: 'transparent',
-            borderColor: 'rgb(255, 183, 77)',
+            borderColor: 'orange',
             borderWidth: 1,
-            pointBackgroundColor: 'rgb(255, 183, 77)',
+            pointBackgroundColor: 'orange',
         },
         {
             data: minDegree,
@@ -346,7 +356,7 @@ function drawChart(maxDegree,minDegree) {
                 this.data.datasets.forEach(function (dataset, i) {
                     let meta = chartInstance.controller.getDatasetMeta(i);
                     
-                    if (dataset.borderColor == 'rgb(79, 295, 247)'){
+                    if (dataset.borderColor == 'rgb(79, 295, 247)') {
                         meta.data.forEach(function (bar, index) {
                             let data = dataset.data[index];
                             ctx.fillText(data + '°', bar._model.x, bar._model.y + 20);
