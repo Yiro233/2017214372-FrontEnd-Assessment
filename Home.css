@@ -578,3 +578,9 @@ h1,h2,h3,h4,h5,h6 {
     animation-name: wind-hide;
     -webkit-animation-name: wind-hide;
 }
+#sec-days #ct-chart-days {
+    position: absolute;
+    left: 23px;
+    height: 150px;
+    top: 121px;
+}
