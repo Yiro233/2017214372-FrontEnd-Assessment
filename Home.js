@@ -79,8 +79,15 @@ function getForecastEtc(province,city,county) {
         dataType: "jsonp",
         enctype: "multipart/form-data",
         success: (res)=>{
+            let maxDegree = new Array();
+            let minDegree = new Array();
             document.querySelector('#txt-tips').textContent = res.data.tips.observe[randArray(1,0,1)];
+            for (let i = 0;i < 8;i++){
+                maxDegree.push(parseInt(res.data.forecast_24h[i].max_degree));
+                minDegree.push(parseInt(res.data.forecast_24h[i].min_degree));
+            }
             setForecast(res);
+            drawChart(maxDegree,minDegree)
         }
     })
 }
@@ -270,4 +277,93 @@ function getInput() {
     args.push($('#city').val());
     args.push($('#county').val());
     setLocation(args[0],args[1],args[2]);
+}
+function drawChart(maxDegree,minDegree) {
+    let maxDegreeChart = document.getElementById("DegreeChart").getContext('2d');
+    let DegreeData = {
+        datasets: [{
+            data: maxDegree,
+            backgroundColor: 'transparent',
+            borderColor: 'orange',
+            borderWidth: 1,
+            pointBackgroundColor: 'orange',
+        },
+        {
+            data: minDegree,
+            backgroundColor: 'transparent',
+            borderColor: 'aqua',
+            borderWidth: 1,
+            pointBackgroundColor: 'aqua',
+        }]
+    }
+    let option = {
+        legend: {
+            position: 'bottom',
+            display: false
+        },
+        layout: {
+            padding: {
+                left: 15,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+        scaleShowLabels: false,
+        scales: {
+            
+            xAxes: [{
+                labels: ['', '', '', '', '', '', '', '', ''],
+                display: false,
+                ticks: {
+                    min: '0'
+                },
+                gridLines: {
+                    display: false,
+                }
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    display: false,
+                    min: -30,
+                    max: 50
+                },
+                gridLines: {
+                    display: false,
+                }
+            }]
+        },
+        animation: {
+            onComplete: function () {
+                let chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.fillStyle = Chart.defaults.global.defaultFontColor;
+                ctx.font = Chart.helpers.fontString(16, 'normal', Chart.defaults.global.defaultFontFamily);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                this.data.datasets.forEach(function (dataset, i) {
+                    let meta = chartInstance.controller.getDatasetMeta(i);
+                    
+                    if (dataset.borderColor == 'aqua'){
+                        meta.data.forEach(function (bar, index) {
+                            let data = dataset.data[index];
+                            ctx.fillText(data + '°', bar._model.x, bar._model.y + 20);
+                        });
+                    }else{
+                        meta.data.forEach(function (bar, index) {
+                            let data = dataset.data[index];
+                            ctx.fillText(data + '°', bar._model.x, bar._model.y - 20);
+                        });
+                    }
+                });
+            }
+        }
+    }
+    new Chart(maxDegreeChart, {
+        type: 'line',
+        data: DegreeData,
+        options: option
+    });
 }
