@@ -22,7 +22,7 @@ window.addEventListener('load',()=>{
 })
 function getWeather(province,city,county) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "https://wis.qq.com/weather/common?source=xw&weather_type=observe|rise",
         data: {"province": province,"city": city,"county": county},
         dataType: "jsonp",
@@ -37,12 +37,12 @@ function getWeather(province,city,county) {
 }
 function getAir(province, city, county) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "https://wis.qq.com/weather/common?source=xw&weather_type=air",
         data: {
             "province": province,
             "city": city,
-            "county": county
+            "county&": county
         },
         dataType: "jsonp",
         enctype: "multipart/form-data",
@@ -73,7 +73,7 @@ function setTxtWeather(weather) {
 }
 function getForecastEtc(province,city,county) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips",
         data: {"province": province,"city": city,"county": county},
         dataType: "jsonp",
@@ -141,6 +141,7 @@ function setForecast(weatherData) {
     }
     for (let i = 0;i < 8;i++){
         let time = new Date(forecast_24h[i].time);
+        let today = week[new Date().getDay()];
         let date = forecast_24h[i].time.slice(5, 7) + '/' + forecast_24h[i].time.slice(8,10);
         let day;
         let day_weather = forecast_24h[i].day_weather;
@@ -149,25 +150,10 @@ function setForecast(weatherData) {
         let nightWthIcon = 'icon-n-' + pinyin.getFullChars(night_weather).toLowerCase();
         let wind_dir = forecast_24h[i].night_wind_direction;
         let wind_pow = forecast_24h[i].night_wind_power;
-        switch (i) {
-            case 0:
-                day = '昨天';
-                break
-            case 1:
-                day = '昨天';
-                break;
-            case 2:
-                day = '今天';
-                break;
-            case 3:
-                day = '明天';
-                break;
-            case 4:
-                day = '后天';
-                break;
-            default:
-                day = week[time.getDay()];
-                break;
+        if (week[time.getDay()] == today){
+            day = '今天';
+        }else{
+            day = week[time.getDay()];
         }
         $('#ls-days').append(
             `<li class = "item" style = "width: 62.5px;">
