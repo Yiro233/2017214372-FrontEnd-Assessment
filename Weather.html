@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="Home.css">
     <link rel="stylesheet" href="iconfontIndex.css">
     <link rel="stylesheet" href="iconfontWeather.css">
+    <script src="Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="Convert_Pinyin.js"></script>
     <script src="Home.js"></script>
@@ -112,7 +113,9 @@
         <section id="sec-days" class="container">
             <div id="ct-scroll" style="width: 500px;">
                 <ol id="ls-days"></ol>
-                <div id="ct-chart-days" style="width: 500px;"></div>
+                <div id="ct-chart-days" style="width: 500px;">
+                    <canvas id="DegreeChart" height="50%" width="100%"></canvas>
+                </div>
             </div>
         </section>
         <section id="sec-living" class="container">
