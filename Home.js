@@ -346,7 +346,7 @@ function drawChart(maxDegree,minDegree) {
                 this.data.datasets.forEach(function (dataset, i) {
                     let meta = chartInstance.controller.getDatasetMeta(i);
                     
-                    if (dataset.borderColor == 'aqua'){
+                    if (dataset.borderColor == 'rgb(79, 295, 247)'){
                         meta.data.forEach(function (bar, index) {
                             let data = dataset.data[index];
                             ctx.fillText(data + '°', bar._model.x, bar._model.y + 20);
