@@ -284,16 +284,16 @@ function drawChart(maxDegree,minDegree) {
         datasets: [{
             data: maxDegree,
             backgroundColor: 'transparent',
-            borderColor: 'orange',
+            borderColor: 'rgb(255, 183, 77)',
             borderWidth: 1,
-            pointBackgroundColor: 'orange',
+            pointBackgroundColor: 'rgb(255, 183, 77)',
         },
         {
             data: minDegree,
             backgroundColor: 'transparent',
-            borderColor: 'aqua',
+            borderColor: 'rgb(79, 295, 247)',
             borderWidth: 1,
-            pointBackgroundColor: 'aqua',
+            pointBackgroundColor: 'rgb(79, 295, 247)',
         }]
     }
     let option = {
