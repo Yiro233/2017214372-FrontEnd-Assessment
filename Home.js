@@ -256,10 +256,10 @@ function setLocation(...args) {
     let location = document.querySelector('#txt-location');
     switch (paramNum) {
         case 0:
-            location.innerHTML = `<span id="icon-location"></span>重庆市 南岸区`;
-            getWeather('重庆市', '重庆市', '南岸区');
-            getForecastEtc('重庆市', '重庆市', '南岸区');
-            getAir('重庆市', '重庆市', '南岸区');
+            location.innerHTML = `<span id="icon-location"></span>重庆市 渝北区`;
+            getWeather('重庆市', '重庆市', '渝北区');
+            getForecastEtc('重庆市', '重庆市', '渝北区');
+            getAir('重庆市', '重庆市', '渝北区');
             break;
         case 1:
             location.innerHTML = `<span id="icon-location"></span>${args[0]}`;
