@@ -18,5 +18,5 @@
 
 * 一周的天气
 * 生活指数
-* [主页在这里](https://yiro233.github.io/2017214372-FrontEnd-Assessment/Weather.html)
+* [主页在这里](https://yiro233.github.io/Weather/Weather.html)
 * [JS文件](Home.js)
